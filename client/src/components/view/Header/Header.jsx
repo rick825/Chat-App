@@ -1,6 +1,5 @@
 import React from 'react'
 import './Header.css';
-import '../../assets/styles/Style.css';
 import { useLoginStatus } from '../../../context/LoginContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';

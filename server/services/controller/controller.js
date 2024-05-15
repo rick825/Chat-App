@@ -74,25 +74,30 @@ exports.login = async (req,res)=>{
 }
 
 //add Photo
+// Backend controller
 exports.addPhoto = async (req, res) => {
+  console.log("Running 2");
   try {
-    const { loggedInUser } = JSON.parse(req.body.loggedInUser); // Parse JSON data
-    const formData = req.file;
-    console.log(formData, ",,,", loggedInUser);
+    console.log("Running");
+    const loggedInUser = JSON.parse(req.body.loggedInUser); 
+
+    if (!req.file) {
+      return res.status(400).json({ error: "No image file uploaded." });
+    }
+
+
+    const imagePath = req.file.path;
+    console.log("image Path-->",imagePath);
+    const updatedUser = await User.findByIdAndUpdate(loggedInUser._id, { profileImage: imagePath }, { new: true });
 
    
-    // const imagePath = formData.path; 
-   
-
-    // const updatedUser = await User.findByIdAndUpdate(loggedInUser._id, { profileImage: imagePath }, { new: true });
-
-    // Return success response with updated user data
-    res.status(200).json({ success: true, message: "Image uploaded and user profile updated successfully" });
+    res.status(200).json({ success: true, message: "Image uploaded and user profile updated successfully", user: updatedUser });
   } catch (error) {
     console.error("Error while adding image:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 
 exports.createGroup = async  (req,res) =>{
@@ -182,10 +187,13 @@ exports.deleteGroup = async (req, res) => {
   }
 }
 
+//join Group
 exports.joinGroup = async (req, res) => {
   try {
-    const { group, memberId } = req.body;
-    console.log("Group:", group);
+    const { group, loggedInUser } = req.body;
+    const memberId = loggedInUser._id; 
+    
+    console.log("User:", loggedInUser);
     const groupId = group._id;
 
     const existingGroup = await Group.findOne({ _id: groupId });
@@ -194,11 +202,13 @@ exports.joinGroup = async (req, res) => {
       return res.status(404).json({ Error: "Group not found" });
     }
 
-    if (existingGroup.members.includes(memberId)) {
+    console.log("Existing group members:", existingGroup);
+
+    if (existingGroup.members.memberId.includes(memberId)) {
       return res.status(400).json({ Error: "Member already in the group" });
     }
 
-    existingGroup.members.push(memberId);
+    existingGroup.members.memberId.push(memberId); 
     const updatedGroup = await existingGroup.save();
 
     return res.status(200).json({ message: "Joined group successfully", group: updatedGroup });
@@ -206,5 +216,37 @@ exports.joinGroup = async (req, res) => {
   } catch (error) {
     console.log("Error while joining group:", error);
     return res.status(500).json({ Error: "Internal Server Error", error });
+  }
+}
+
+//leave Group
+exports.leaveGroup = async (req,res)=>{
+  try {
+    const { group, loggedInUser } = req.body;
+    const memberId = loggedInUser._id; 
+    
+    console.log("User:", loggedInUser);
+    const groupId = group._id;
+
+    const existingGroup = await Group.findOne({ _id: groupId });
+
+    if (!existingGroup) {
+      return res.status(404).json({ Error: "Group not found" });
+    }
+
+    console.log("Existing group members:", existingGroup);
+
+    if (!existingGroup.members.memberId.includes(memberId)) {
+      return res.status(400).json({ Error: "Member not in the group" });
+    }
+
+    existingGroup.members.memberId.remove(memberId); 
+    const updatedGroup = await existingGroup.save();
+
+    return res.status(200).json({ message: "Left group successfully", group: updatedGroup });
+
+  } catch (error) {
+    console.log("Error While Leaving Group",error);
+    return res.status(500).json({Error: "Internal Server Error",error});
   }
 }

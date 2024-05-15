@@ -9,7 +9,7 @@ const http = require('http');
 
 
 
-const connectDB = require('../new/services/db/db');
+const connectDB = require('./services/db/db');
 
 // Load environment variables
 require('dotenv').config();
@@ -73,7 +73,7 @@ app.get('/server', (req, res) => {
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 //API Endpoints
-app.use('/',require('../new/services/routes/routes'));
+app.use('/',require('./services/routes/routes'));
 
 
 // Serve index.html for any other routes

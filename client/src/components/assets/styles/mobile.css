@@ -4,6 +4,7 @@
     }
     
     .main{
+        width: 100%;
         flex-direction: column;
         margin-top: 6rem;
     }
@@ -102,7 +103,51 @@
 
   .form input{
    padding: 1rem 6rem;  
-}
+  }
 
-    /* end signup/login section */
+ /* end signup/login section */
+
+ /* Dashboard   */
+ .dashboard .sidenav{
+    display: none;
+ }
+
+ .dashboard .dashcompright{
+    width: 100%;
+    padding: 0 2rem;
+ }
+
+ .Dashtop .dashtopbutton .dashButton{
+    width: 40%;
+ }
+
+ .Dashtop .dashtopbutton .dashmid{
+    width: 60%;
+ }
+
+ .Dashtop .dashtopbutton .dashright{
+    display: none;
+ }
+
+ .Dashtop .dashtopbutton   .dashButton .btn2{
+    display: none;
+ }
+
+ .Dashtop .dashtopbutton .dashtopcont .createButton{
+    display: block;
+ }
+
+ .Dashtop .dashtopbutton .dashmid .btn{
+    padding: 0.8rem;
+ }
+
+ .dashtopbutton .dashmid .btn .btnleft img{
+    width: 25px;
+ }
+
+ .dashtopbutton .dashmid .btn  .btnright{
+    display: none;
+ }
+ /* end Dashboard */
+
 }

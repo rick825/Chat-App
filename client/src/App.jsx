@@ -1,8 +1,9 @@
 import React from 'react';
 import Container from './components/container/Container'
-import './components/assets/styles/Style.css';
 import {LoginProvider} from './context/LoginContext';
 import { DashboaordProvider } from './context/DashboardContext';
+import './components/assets/styles/Style.css';
+import './components/assets/styles/mobile.css';
 
 function App() {
   return (

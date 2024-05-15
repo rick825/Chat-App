@@ -103,7 +103,7 @@ route.post('/api/verifyuser',async (req,res)=>{
       return res.status(204).json({message:"No Groups Found"});
     }
 
-    console.log("Groups-->", groups);
+    console.log("Groups --->",groups);
 
     return res.status(200).json(groups);
   } catch (error) {
@@ -114,10 +114,11 @@ route.post('/api/verifyuser',async (req,res)=>{
 
 route.post('/api/signup',controller.signup);
 route.post('/api/login', controller.login);
-route.post('/api/upload-profile-image,',controller.addPhoto);
+route.post('/api/upload-profile-image',controller.addPhoto);
 route.post('/api/createGroup', controller.createGroup);
 route.post('/api/joinGroup', controller.joinGroup);
 route.post('/api/editGroup', controller.editGroup);
-route.post('/api/deleteGroup',controller.deleteGroup)
+route.post('/api/deleteGroup',controller.deleteGroup);
+route.post('/api/leaveGroup',controller.leaveGroup);
 
 module.exports = route;

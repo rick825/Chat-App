@@ -98,6 +98,20 @@
 
 /* end header section */
 
+@media only screen and (max-width: 600px) {
+    
+    /* header */
+    .nav .navleft{
+        width: 40%;
+        padding: 3rem 0;
+        margin-left: -1.6rem;
+    }
 
+    .navright .navlist{
+        margin-right: 3rem;
+    }
+    /* end header */
+
+}
 
 

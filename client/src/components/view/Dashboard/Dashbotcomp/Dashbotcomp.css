@@ -158,7 +158,7 @@
   }
 
 .bot-comp-main .bot-comp-box{
-    width: 26rem;
+    min-width: 26rem;
     height:23rem;
     border: 1px solid transparent;
     display: flex;

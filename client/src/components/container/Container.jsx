@@ -6,8 +6,6 @@ import Login from '../view/Registration/Login';
 import Signup from '../view/Registration/Signup';
 import Dashboard from '../view/Dashboard/Dashboard';
 import { useLoginStatus } from '../../context/LoginContext';
-import '../assets/styles/Style.css';
-import '../assets/styles/mobile.css';
 import { Profile } from '../view/profile/Profile';
 
 const Container = () => {
